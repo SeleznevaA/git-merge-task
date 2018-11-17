@@ -20,11 +20,11 @@ namespace Kontur.Courses.Git
 			return calc.Calculate(args);
 		}
 
-		[Test]
-		public void OneArg()
+		[TestCase("42", 42)]
+		[TestCase("43", 43)]
+		public void OneArg(string args, int expected)
 		{
-			Assert.AreEqual(42, Calc("42").Value);
-			Assert.AreEqual(43, Calc("43").Value);
+			Assert.AreEqual(expected, Calc(args).Value);
 		}
 
 		[Test]
@@ -35,11 +35,12 @@ namespace Kontur.Courses.Git
 			Assert.AreEqual(42, Calc("").Value);
 		}
 
-		[Test]
-		public void ThreeArg()
+		[TestCase("42 + 13", 55)]
+		[TestCase("2 - 1", 1)]
+		public void ThreeArg(string args, int expected)
 		{
-			Assert.AreEqual(55, Calc("42 + 13").Value);
-			Assert.AreEqual(1, Calc("2 - 1").Value);
+			Assert.AreEqual(expected, Calc(args).Value);
+
 		}
 
 		[TestCase("1", ExpectedResult = new[] { "1" })]
